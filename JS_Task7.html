@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS_TASK7</title>
+    <style>
+        #train {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: 100px;
+            height: 50px;
+            /* background-color: red; */
+            transition: left 0s linear;
+        }
+        .btn{
+            margin-top: 30%;
+            text-align: center;
+        }
+        /* Styles for screens smaller than 768px (e.g., mobile phones) */
+@media (max-width: 768px) {
+    /* Your responsive CSS rules go here */
+    .container {
+        max-width: 100%; /* Expand container to full width */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="btn">
+        <p style="color: rgb(2, 2, 110); font-size: large;"><B>Click the following buttons to handle animation</B></p>
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+</div>
+    <div id="train">
+        <img src="train.jpeg">
+    </div>
+
+    <script>
+        let trainPosition = 0; // Initial position of the train
+        let trainInterval;
+
+        const train = document.getElementById('train');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+
+        function moveTrain() {
+            trainPosition += 10; // Adjust the speed of the train by changing this value
+            train.style.left = trainPosition + 'px';
+
+            if (trainPosition >= window.innerWidth) {
+                stopTrain();
+            }
+        }
+
+        function startTrain() {
+            trainInterval = setInterval(moveTrain, 100); // Adjust the interval for smoother/faster animation
+            startButton.disabled = true;
+            stopButton.disabled = false;
+        }
+
+        function stopTrain() {
+            clearInterval(trainInterval);
+            startButton.disabled = false;
+            stopButton.disabled = true;
+        }
+
+        startButton.addEventListener('click', startTrain);
+        stopButton.addEventListener('click', stopTrain);
+    </script>
+</body>
+</html>
